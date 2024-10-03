@@ -4,7 +4,7 @@ import { useState } from 'react';
 import CHeader from './components/CHeader';
 import Post from './components/CPost';
 
-export default function App() {
+const App = () => {
 
   const [Posts, setPosts] = useState([
     {
@@ -93,3 +93,5 @@ const styles = StyleSheet.create({
     marginTop: 50
   },
 });
+
+export default App;

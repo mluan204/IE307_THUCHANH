@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, Switch, TextInput, Button, Alert, ScrollView, StyleSheet, Image } from 'react-native';
+import Header from './compenents/Header';
+import FormFeedBack from './compenents/FormFeedBack';
+import FAQList from './compenents/FQAList';
 
 const App = () => {
 
@@ -45,43 +48,6 @@ const App = () => {
   );
 };
 
-const Header = ({isDarkMode}) => (
-  <View>
-    <Image 
-      style={styles.logo}
-      source={{uri: 'https://www.scorchsoft.com/public/capabilities/head/react-native-logo-square.webp'}}
-    />
-    <Text style={[styles.title, isDarkMode ? styles.darkText : styles.lightText]}>React Native App</Text>
-  </View>
-)
-
-const FormFeedBack = ({feedback, setFeedback, HandleSendFeedBack, isDarkMode}) => (
-  <View>
-    <Text style={[styles.fbtitle, isDarkMode ? styles.darkText : styles.lightText]}>Feedback</Text>
-    <TextInput 
-      style={isDarkMode ? styles.darkInput : styles.lightInput}
-      placeholder="Your feedback here.."
-      placeholderTextColor={isDarkMode ? "#ccc" : "#666"}
-      value={feedback}
-      onChangeText={setFeedback}
-    />
-    <Button 
-      title='SEND FEEDBACK'
-      onPress={HandleSendFeedBack}
-    />
-  </View>
-)
-
-const FAQList = ({ feedbackList, isDarkMode }) => (
-  <ScrollView style={styles.listContainer}>
-    <Text style={isDarkMode ? styles.darkText : styles.lightText}>Frequently Asked Questions</Text>
-    {feedbackList.map((item, index) => (
-      <Text key={index} style={isDarkMode ? styles.darkText : styles.lightText}>
-        Q: {item}
-      </Text>
-    ))}
-  </ScrollView>
-);
 
 const styles = StyleSheet.create({
   container: {

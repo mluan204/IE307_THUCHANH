@@ -1,7 +1,7 @@
 import { View,Text, StyleSheet } from "react-native";
 
 
-export default function InteractionCount ({ like, cmt, share }){
+const InteractionCount = ({ like, cmt, share }) => {
     return (
       <View style={styles.reactContainer}>
         <View style={styles.sluongReact}>
@@ -26,10 +26,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginVertical: 5
       },
-      sluongReact:{
+    sluongReact:{
         fontSize: 16,
         color: "grey"
       },
-  })
+})
+
+export default InteractionCount;
 
   

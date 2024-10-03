@@ -5,7 +5,7 @@ import CPostConten from './CPostContent'
 import CInteractionCount from './CInteractionCount'
 import CInteractionButtons from './CInteractionButtons'
 
-export default function Post({ post, SuKienNutLike, SuKienNutCmt, SuKienNutShare }){
+const Post = ({ post, SuKienNutLike, SuKienNutCmt, SuKienNutShare }) => {
     return (
       <View style={styles.containerPost}>
         <View style={styles.post}>
@@ -44,4 +44,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginVertical: 4
       },
-})
+});
+
+export default Post;

@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 
-export default function CHeader(){
+const CHeader = () => {
     return (
         <View style={styles.viewTitle}>
         <Image style={styles.logo} source={{uri: 'https://i0.wp.com/www.senviet.art/wp-content/uploads/edd/2021/12/dhuit.jpg?fit=700%2C525&ssl=1'}}/>
@@ -34,4 +34,6 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     paddingStart: 20
   },
-})
+});
+
+export default CHeader;

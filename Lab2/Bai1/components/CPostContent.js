@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 
-export default function CPostContent({noidung, image}){
+const CPostContent = ({noidung, image}) => {
     return (
         <View>
           <Text style={styles.noidung}>{noidung}</Text>
@@ -14,12 +14,14 @@ const styles = StyleSheet.create({
         fontSize: 22,
         marginStart: 12
       },
-      image: {
+    image: {
         width: 'auto',
         height: 400,
         borderRadius: 10,
         marginHorizontal: 7,
         marginVertical: 4
       },
-  })
+});
+
+export default CPostContent;
 

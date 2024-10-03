@@ -1,7 +1,7 @@
 
 import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 
-export default function InteractionButtons({ trangthai, SuKienNutLike, SuKienNutCmt, SuKienNutShare, id }){
+const InteractionButtons = ({ trangthai, SuKienNutLike, SuKienNutCmt, SuKienNutShare, id }) => {
     return (
       <View style={styles.reactContainer}>
         <TouchableOpacity style={styles.btnStyle} onPress={() => SuKienNutLike(id)}>
@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
         marginStart: 5,
         fontSize: 20
     }
-})
+});
+
+export default InteractionButtons;
 
   

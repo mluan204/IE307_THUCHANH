@@ -1,6 +1,6 @@
 import { View, Image, Text, StyleSheet } from "react-native";
 
-export default function AvatarUser  ({ avatar, username }){
+const  AvatarUser = ({ avatar, username }) => {
     return (
       <View style={styles.avt_user}>
         <Image style={styles.avatar} source={avatar} />
@@ -25,6 +25,8 @@ export default function AvatarUser  ({ avatar, username }){
         alignItems: "center",
         padding: 12
       },
-  })
+  });
+
+export default AvatarUser;
 
   
