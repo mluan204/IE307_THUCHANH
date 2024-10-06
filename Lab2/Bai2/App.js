@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Switch, TextInput, Button, Alert, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, Text, Switch, Alert, StyleSheet } from 'react-native';
 import Header from './compenents/Header';
 import FormFeedBack from './compenents/FormFeedBack';
 import FAQList from './compenents/FQAList';
