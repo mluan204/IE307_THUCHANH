@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { fruits_vegetables, workouts } from './data';
 import { StyleSheet, Button, Text, View, FlatList, ImageBackground, SectionList, Image } from 'react-native';
 
-
+{/* Thạch Minh Luân 22520827 */}
 export default function App() {
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -14,8 +14,7 @@ export default function App() {
   const handleDeselect = (item) => {
     setSelectedItems((prev) => prev.filter((i) => i !== item));
   };
-
-
+{/* Thạch Minh Luân 22520827 */}
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -25,8 +24,7 @@ export default function App() {
         <View style={styles.viewTitle}>
           <Text style={styles.title}>FlatList - Workouts</Text>
         </View>
-
-
+        
           {/* FlatList */}
         <ImageBackground source={require('./assets/workouts.jpg')}
             style={styles.imgBackground}>
@@ -51,7 +49,7 @@ export default function App() {
         </ImageBackground>
       </View>
 
-
+    {/* Thạch Minh Luân 22520827 */}
       <View style={styles.viewAlist}>
         {/* title  */}
         <View style={styles.viewTitle}>
@@ -83,12 +81,14 @@ export default function App() {
             </View>
           )} 
           />
+          {/* Thạch Minh Luân 22520827 */}
         </View>
         </ImageBackground>
       </View>
 
       {/* Selected */}
       <View style={styles.selectedContainer}>
+        {/* Thạch Minh Luân 22520827 */}
         <Text style={styles.titleSelected}>SELECTED EXERCISES</Text>
         <View style={styles.selectedView}>
         <Text style={styles.listSelected}>{selectedItems.join(', ')}</Text>
@@ -97,7 +97,7 @@ export default function App() {
     </View>
   );
 }
-
+{/* Thạch Minh Luân 22520827 */}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingStart: 7,
   },
-  sectionHeaderText: {
+  sectionHeaderText: { 
     fontSize: 26,
     fontWeight: "600",
     color: "#FFFFFF"
@@ -205,3 +205,4 @@ const styles = StyleSheet.create({
     marginEnd: 5
   }
 });
+{/* Thạch Minh Luân 22520827 */}

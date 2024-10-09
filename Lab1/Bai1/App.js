@@ -1,9 +1,9 @@
-
 import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 
 export default function App() {
 
+  {/* Thạch Minh Luân 22520827 */}
   const [Posts, setPosts] = useState([
     {
       id: 1,
@@ -40,6 +40,7 @@ export default function App() {
     },
   ]);
 
+  {/* Thạch Minh Luân 22520827 */}
   const SuKienNutLike = (id) =>{
     const CapNhatPost = Posts.map(post => post.id === id ? (
       post.trangthai ? {...post, trangthai: false, like: post.like-1}
@@ -64,7 +65,7 @@ export default function App() {
     setPosts(CapNhatPost);
   }
 
-
+  {/* Thạch Minh Luân 22520827 */}
   return (
    <View style={styles.container}>
       <ScrollView>
@@ -104,7 +105,7 @@ export default function App() {
 
                   {/* Line ngang */}
                   <View style={styles.lineStyle}></View>
-
+                  {/* Thạch Minh Luân 22520827 */}
                   {/* Các nút tương tác */}
                   <View style={styles.reactContainer}>
                     <TouchableOpacity style={styles.btnStyle} onPress={() => SuKienNutLike(item.id)}>
@@ -132,7 +133,7 @@ export default function App() {
       </View>
   );
 }
-
+{/* Thạch Minh Luân 22520827 */}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
