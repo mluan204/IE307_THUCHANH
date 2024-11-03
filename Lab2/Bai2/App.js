@@ -3,6 +3,7 @@ import { View, Text, Switch, Alert, StyleSheet } from 'react-native';
 import Header from './compenents/Header';
 import FormFeedBack from './compenents/FormFeedBack';
 import FAQList from './compenents/FQAList';
+import Settings from './compenents/Setting';
 
 const App = () => {
 
@@ -23,15 +24,12 @@ const App = () => {
   return (
     <View style={[styles.container, isDarkMode ? styles.darkContainer : styles.lightContainer]}>
       <Header isDarkMode={isDarkMode}/>
-      <View style={styles.switchContainer}>
-        <Text style={isDarkMode ? styles.darkText : styles.lightText}>Dark mode</Text>
-        <Switch value={isDarkMode} onValueChange={setIsDarkMode}/>
-      </View>
-
-      <View style={styles.switchContainer}>
-        <Text style={isDarkMode ? styles.darkText : styles.lightText}>Notifications</Text>
-        <Switch value={isNotificationsEnabled} onValueChange={setIsNotificationsEnabled}/>
-      </View>
+      <Settings
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+        isNotificationsEnabled={isNotificationsEnabled}
+        setIsNotificationsEnabled={setIsNotificationsEnabled}
+      />
 
       <FormFeedBack
         feedback={feedback}
@@ -71,21 +69,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     alignSelf: "center"
-  },
-  switchContainer:{
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 5,
-    paddingHorizontal: 20
-  },
-  darkText: {
-    fontSize: 20,
-    color: "#fff"
-  },
-  lightText: {
-    fontSize: 20,
-    color: "#0a0a0a"
   },
   fbtitle: {
     fontSize: 18,
