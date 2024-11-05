@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
+
 const LoginScreen = ({ navigation }) => {
-  const {login} = useContext(AuthContext);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+  const {login} = useContext(AuthContext)
+
 
   return (
     <View style={styles.viewCha}>
@@ -23,9 +25,9 @@ const LoginScreen = ({ navigation }) => {
             source={{uri: "https://cdn-icons-png.flaticon.com/128/646/646094.png"}}/>
           <TextInput 
             style={styles.input}
-            value={email} 
-            onChangeText={setEmail} 
-            placeholder="Email"
+            value={username} 
+            onChangeText={setUsername} 
+            placeholder="Username"
             placeholderTextColor={"#666"}
             />
         </View>
@@ -47,7 +49,7 @@ const LoginScreen = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.btnLogin}
-           onPress={() => login(email, password)}
+           onPress={() => login(username, password)}
         >
           <Text style={styles.txtLogin}>LOG IN</Text>
         </TouchableOpacity>
@@ -112,10 +114,10 @@ const styles = StyleSheet.create({
     width: '85%'
   },
   forgotpw: {
-    width: '30%',
+    width: 'auto',
     alignSelf: "flex-end",
-    marginEnd: 50,
-    marginBottom: 10,
+    marginEnd: 70,
+    marginBottom: 15,
     color: "red"
   },
   btnLogin: {
@@ -155,15 +157,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   txtNoAcc: {
-    fontSize: 20
+    fontSize: 15
   },
   signup: {
     width: 'auto',
     marginStart: 5,
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: "bold",
     color: "blue",
-  }
+  },
 })
 
 export default LoginScreen;

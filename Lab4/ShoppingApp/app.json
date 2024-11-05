@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Bai3",
-    "slug": "Bai3",
+    "name": "ShoppingApp",
+    "slug": "ShoppingApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -1,41 +1,56 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../pages/HomeScreen';
 import CategoriesScreen from '../pages/CategoriesScreen';
-import FavoritesScreen from '../pages/FavoritesScreen'
+import CartsScreen from '../pages/CartsScreen'
 import ProfileScreen from '../pages/ProfileScreen'
+import ProductDetailScreen from '../pages/ProductDetailScreen';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { View, Text, StyleSheet } from 'react-native';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator(); 
+const CategoriesStack = () => ( 
+ <Stack.Navigator> 
+    <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} options={{headerShown: false}}/> 
+    <Stack.Screen name="ProductDetail" component={ProductDetailScreen} /> 
+  </Stack.Navigator> 
+);
+
+const HomeStack = () => ( 
+  <Stack.Navigator> 
+     <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}}/> 
+     <Stack.Screen name="ProductDetail" component={ProductDetailScreen} /> 
+   </Stack.Navigator> 
+ );
 
 const MainBottom = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen 
         name="Home" 
-        component={HomeScreen} 
+        component={HomeStack} 
         options={{
-          headerShown: false,
-          tabBarIcon: ({color}) => <Entypo name="home" size={24} color={color}/>
+          tabBarIcon: ({color}) => <FontAwesome name="home" size={24} color={color} />
         }}
       />
       <Tab.Screen 
         name="Categories" 
-        component={CategoriesScreen} 
+        component={CategoriesStack} 
         options={{
           tabBarIcon: ({color}) => <MaterialIcons name="category" size={24} color={color} />
         }}
       />
       <Tab.Screen 
-        name="Favorites" 
-        component={FavoritesScreen} 
+        name="Cart" 
+        component={CartsScreen} 
         options={{
           headerShown: false,
           tabBarIcon: ({color}) => (
             <View>
-              <MaterialIcons name="favorite" size={24} color={color} />
+              <FontAwesome name="shopping-cart" size={24} color={color} />
               <View style={styles.huyhieu}>
                 <Text style={styles.txt}>3</Text>
               </View>

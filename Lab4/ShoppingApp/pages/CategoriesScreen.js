@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { View, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 import { fetchCategories, fetchAllProducts, fetchProductsByCategory } from '../services/api';
 
 import CategoryItem from '../components/categoryItem';
@@ -9,6 +10,7 @@ const CategoriesScreen = ({ navigation }) => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -16,9 +18,16 @@ const CategoriesScreen = ({ navigation }) => {
       setCategories(categories);
       const products = await fetchAllProducts();
       setProducts(products);
+      setLoading(false);
     };
     getCategories();
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      handleCategorySelect('All');
+    }, [])
+  );
 
   const handleCategorySelect = async (category) => {
     setSelectedCategory(category);
@@ -30,6 +39,13 @@ const CategoriesScreen = ({ navigation }) => {
       setProducts(products);
     }
   };
+
+  if (loading) { 
+    return ( 
+    <View style={styles.loaderContainer}> 
+            <ActivityIndicator size="large" color="blue" /> 
+    </View> 
+  );}
 
   return (
     <View style={styles.container}>
@@ -52,7 +68,7 @@ const CategoriesScreen = ({ navigation }) => {
         data={products}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <ProductItem product={item} onPress={() => navigation.navigate('Products', { productId: item.id })} />
+          <ProductItem product={item} onPress={() => navigation.navigate('ProductDetail', { productId: item.id })} />
         )}
       />
     </View>
@@ -66,6 +82,10 @@ const styles = StyleSheet.create({
   }, 
   container: {
     paddingBottom: '20%'
+  },
+  loaderContainer: {
+    justifyContent: "center",
+    height: '100%'
   }
 })
 

@@ -1,7 +1,7 @@
 
 import { View, Text, StyleSheet } from 'react-native';
 
-const FavoritesScreen = () => {
+const CartsScreen = () => {
 
   return (
     <View style={styles.container}>
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FavoritesScreen;
+export default CartsScreen;
