@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "Bai1",
+    "slug": "Bai1",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./components/assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./components/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./components/assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./components/assets/favicon.png"
+    }
+  }
+}
