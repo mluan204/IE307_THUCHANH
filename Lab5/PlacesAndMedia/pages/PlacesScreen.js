@@ -1,16 +1,10 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import * as SQLite from "expo-sqlite";
 import { useCallback, useEffect, useState, useContext } from "react";
 import PlaceCard from "../components/PlaceCard";
 import { useFocusEffect } from "@react-navigation/native";
 import { LocationContext } from "../Context/LocationContext";
-
+// Thạch Minh Luân - 22520827
 export default function PlacesScreen() {
   const [places, setPlaces] = useState([]);
   const { setLocation } = useContext(LocationContext);
@@ -34,7 +28,7 @@ export default function PlacesScreen() {
       getData();
     }, [])
   );
-
+  // Thạch Minh Luân - 22520827
   const deleteDB = async () => {
     const db = await SQLite.openDatabaseAsync("Places");
     await db.execAsync(`
@@ -42,7 +36,7 @@ export default function PlacesScreen() {
     `);
     setPlaces([]);
   };
-
+  // Thạch Minh Luân - 22520827
   const handleDelete = (id) => {
     setPlaces((prevPlaces) => prevPlaces.filter((place) => place.id !== id));
   };
@@ -63,7 +57,7 @@ export default function PlacesScreen() {
           )}
         />
       )}
-
+      {/* // Thạch Minh Luân - 22520827 */}
       {/* {places.length === 0 ? null : (
         <TouchableOpacity onPress={deleteDB} style={styles.deleteButton}>
           <Text style={styles.deleteText}>XÓA HẾT</Text>
@@ -72,7 +66,7 @@ export default function PlacesScreen() {
     </View>
   );
 }
-
+// Thạch Minh Luân - 22520827
 const styles = StyleSheet.create({
   container: {
     flex: 1,

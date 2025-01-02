@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import MainBottom from "./navigation/MainBottom";
 import { NavigationContainer } from "@react-navigation/native";
 import { LocationProvider } from "./Context/LocationContext";
-
+// Thạch Minh Luân - 22520827
 export default function App() {
   return (
     <LocationProvider>
@@ -13,12 +13,4 @@ export default function App() {
     </LocationProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+// Thạch Minh Luân - 22520827

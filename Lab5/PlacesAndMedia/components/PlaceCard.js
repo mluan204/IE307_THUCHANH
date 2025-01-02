@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import * as SQLite from "expo-sqlite";
 import { useNavigation } from "@react-navigation/native";
-
+// Thạch Minh Luân - 22520827
 export default function PlaceCard({ item, onDelete }) {
   const navigation = useNavigation();
   const deleteRow = async () => {
@@ -20,10 +20,9 @@ export default function PlaceCard({ item, onDelete }) {
      `
     );
 
-    // Call the onDelete function passed as prop to update the parent component
     onDelete(item.id);
   };
-
+  // Thạch Minh Luân - 22520827
   const showDeleteConfirmation = () => {
     Alert.alert(
       "Confirm Deletion",
@@ -41,12 +40,7 @@ export default function PlaceCard({ item, onDelete }) {
       ]
     );
   };
-
-  // const GoToDetail = ({ item }) => {
-  //   console.log(item);
-  //   navigation.navigate("Content", { item: item });
-  // };
-
+  // Thạch Minh Luân - 22520827
   return (
     <TouchableOpacity
       style={styles.container}
@@ -59,9 +53,10 @@ export default function PlaceCard({ item, onDelete }) {
         <Text style={styles.address}>{item.address}</Text>
       </View>
     </TouchableOpacity>
+    // Thạch Minh Luân - 22520827
   );
 }
-
+// Thạch Minh Luân - 22520827
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -78,14 +73,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ddd",
     marginVertical: 8,
-  },
+  }, // Thạch Minh Luân - 22520827
   img: {
     height: "100%",
     width: 120,
     borderTopLeftRadius: 12,
     borderBottomLeftRadius: 12,
     resizeMode: "cover",
-  },
+  }, // Thạch Minh Luân - 22520827
   contentContainer: {
     flex: 1,
     padding: 15,
@@ -96,7 +91,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#333333",
     marginBottom: 5,
-  },
+  }, // Thạch Minh Luân - 22520827
   address: {
     fontSize: 14,
     color: "#777777",

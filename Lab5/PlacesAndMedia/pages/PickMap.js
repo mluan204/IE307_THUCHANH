@@ -9,11 +9,11 @@ export default function PickMap({ navigation }) {
   const [marker, setMarker] = useState(null);
   const [description, setDescription] = useState("");
   const { setLocation } = useContext(LocationContext);
-
+  // Thạch Minh Luân - 22520827
   const handleMapPress = async (e) => {
     setMarker(e.nativeEvent.coordinate);
   };
-
+  // Thạch Minh Luân - 22520827
   const saveInfo = () => {
     if (marker) {
       setLocation(marker);
@@ -22,7 +22,7 @@ export default function PickMap({ navigation }) {
       Alert.alert("Cảnh báo", "Vui lòng chọn địa chỉ");
     }
   };
-
+  // Thạch Minh Luân - 22520827
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -36,7 +36,7 @@ export default function PickMap({ navigation }) {
       ),
       headerTitle: "Chọn địa chỉ",
     });
-
+    // Thạch Minh Luân - 22520827
     const fetchAddress = async () => {
       try {
         const response = await fetch(
@@ -58,7 +58,7 @@ export default function PickMap({ navigation }) {
       fetchAddress();
     }
   }, [marker]);
-
+  // Thạch Minh Luân - 22520827
   return (
     <View style={styles.container}>
       <MapView
@@ -80,22 +80,18 @@ export default function PickMap({ navigation }) {
           />
         )}
       </MapView>
-
+      {/* // Thạch Minh Luân - 22520827 */}
       {/* Address Display */}
       {description ? (
         <View style={styles.addressContainer}>
           <Text style={styles.addressText}>{description}</Text>
         </View>
       ) : null}
-
-      {/* Save Button */}
-      {/* <TouchableOpacity style={styles.fab} onPress={saveInfo}>
-        <Icon name="check" size={20} color="white" />
-      </TouchableOpacity> */}
+      {/* // Thạch Minh Luân - 22520827 */}
     </View>
   );
 }
-
+// Thạch Minh Luân - 22520827
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -106,7 +102,7 @@ const styles = StyleSheet.create({
   },
   saveIcon: {
     marginRight: 10,
-  },
+  }, // Thạch Minh Luân - 22520827
   addressContainer: {
     position: "absolute",
     bottom: 20,
@@ -120,12 +116,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5,
-  },
+  }, // Thạch Minh Luân - 22520827
   addressText: {
     fontSize: 16,
     color: "#333",
     textAlign: "center",
-  },
+  }, // Thạch Minh Luân - 22520827
   fab: {
     position: "absolute",
     right: 20,
@@ -141,5 +137,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 10,
     elevation: 5,
-  },
+  }, // Thạch Minh Luân - 22520827
 });

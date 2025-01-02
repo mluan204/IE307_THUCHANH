@@ -7,7 +7,7 @@ import * as Linking from "expo-linking";
 export default function Map({ route }) {
   const { latitude, longitude } = route.params;
   const [currentLocation, setCurrentLocation] = useState(null);
-
+  // Thạch Minh Luân - 22520827
   useEffect(() => {
     // Get the current location of the user
     const getCurrentLocation = async () => {
@@ -16,20 +16,20 @@ export default function Map({ route }) {
         Alert.alert("Permission Denied", "Location permission is required.");
         return;
       }
-
+      // Thạch Minh Luân - 22520827
       let location = await Location.getCurrentPositionAsync({});
       setCurrentLocation(location.coords);
     };
 
     getCurrentLocation();
   }, []);
-
+  // Thạch Minh Luân - 22520827
   const handleGetDirections = () => {
     if (currentLocation) {
       const { latitude: currentLat, longitude: currentLong } = currentLocation;
 
       const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${currentLat},${currentLong}&destination=${latitude},${longitude}&travelmode=driving`;
-
+      // Thạch Minh Luân - 22520827
       Linking.openURL(directionsUrl).catch((err) =>
         Alert.alert("Error", "Unable to open map application")
       );
@@ -37,7 +37,7 @@ export default function Map({ route }) {
       Alert.alert("Error", "Unable to retrieve current location");
     }
   };
-
+  // Thạch Minh Luân - 22520827
   return (
     <View style={styles.container}>
       <MapView
@@ -50,27 +50,28 @@ export default function Map({ route }) {
         }}
         showsUserLocation={true}
       >
+        {/* // Thạch Minh Luân - 22520827 */}
         <Marker
           coordinate={{ latitude, longitude }}
           title="Selected Location"
         />
       </MapView>
-
+      {/* // Thạch Minh Luân - 22520827 */}
       <View style={styles.buttonContainer}>
         <Button title="Get Directions" onPress={handleGetDirections} />
       </View>
     </View>
   );
 }
-
+// Thạch Minh Luân - 22520827
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-  },
+  }, // Thạch Minh Luân - 22520827
   map: {
     flex: 1,
-  },
+  }, // Thạch Minh Luân - 22520827
   buttonContainer: {
     position: "absolute",
     bottom: 20,
@@ -84,5 +85,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5,
-  },
+  }, // Thạch Minh Luân - 22520827
 });

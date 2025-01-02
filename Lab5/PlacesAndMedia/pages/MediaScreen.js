@@ -5,10 +5,10 @@ import { Image } from "expo-image";
 import Icon from "react-native-vector-icons/FontAwesome6";
 import { Video } from "expo-av";
 import { useFocusEffect } from "@react-navigation/native";
-
+// Thạch Minh Luân - 22520827
 const MediaScreen = ({ navigation }) => {
   const [media, setMedia] = useState([]);
-
+  // Thạch Minh Luân - 22520827
   useFocusEffect(
     useCallback(() => {
       (async () => {
@@ -18,7 +18,7 @@ const MediaScreen = ({ navigation }) => {
             sortBy: "creationTime",
             mediaType: ["video", "photo"],
           });
-
+          // Thạch Minh Luân - 22520827
           const detailedMedia = await Promise.all(
             mediaAssets.assets.map(async (item) => {
               const assetInfo = await MediaLibrary.getAssetInfoAsync(item.id);
@@ -37,7 +37,7 @@ const MediaScreen = ({ navigation }) => {
       })();
     }, [])
   );
-
+  // Thạch Minh Luân - 22520827
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -51,7 +51,7 @@ const MediaScreen = ({ navigation }) => {
       ),
     });
   }, [navigation]);
-
+  // Thạch Minh Luân - 22520827
   const renderItem = ({ item }) => {
     if (item.mediaType === "video") {
       return (
@@ -67,7 +67,7 @@ const MediaScreen = ({ navigation }) => {
       return <Image source={{ uri: item.localUri }} style={styles.image} />;
     }
   };
-
+  // Thạch Minh Luân - 22520827
   return (
     <View style={styles.container}>
       <FlatList
@@ -79,7 +79,7 @@ const MediaScreen = ({ navigation }) => {
       />
     </View>
   );
-};
+}; // Thạch Minh Luân - 22520827
 
 const styles = StyleSheet.create({
   container: {

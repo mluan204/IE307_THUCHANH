@@ -16,18 +16,27 @@ import { Video } from "expo-av";
 import * as MediaLibrary from "expo-media-library";
 import Icon from "react-native-vector-icons/FontAwesome6";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import * as Notifications from "expo-notifications";
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
+// Thạch Minh Luân - 22520827
 export default function VideoScreen({ navigation }) {
   const [isRecording, setIsRecording] = useState(false);
   const [videoUri, setVideoUri] = useState("");
   const [hasFinishedRecording, setHasFinishedRecording] = useState(false);
   const [facing, setFacing] = useState("back");
   const cameraRef = useRef(null);
-
+  // Thạch Minh Luân - 22520827
   const [cameraPermission, requestCameraPermission] = useCameraPermissions();
   const [microphonePermission, requestMicrophonePermission] =
     useMicrophonePermissions();
-
+  // Thạch Minh Luân - 22520827
   useEffect(() => {
     (async () => {
       await requestCameraPermission();
@@ -36,13 +45,22 @@ export default function VideoScreen({ navigation }) {
       if (status !== "granted") {
         alert("Cần quyền truy cập thư viện để lưu video.");
       }
+      const { status: notificationStatus } =
+        await Notifications.requestPermissionsAsync();
+      if (notificationStatus !== "granted") {
+        const { status: notificationPermissionStatus } =
+          await Notifications.requestPermissionsAsync();
+        if (notificationPermissionStatus !== "granted") {
+          alert("You need to allow notifications to receive updates.");
+        }
+      }
     })();
   }, []);
-
+  // Thạch Minh Luân - 22520827
   const toggleCameraFacing = () => {
     setFacing((current) => (current === "back" ? "front" : "back"));
   };
-
+  // Thạch Minh Luân - 22520827
   const startRecording = async () => {
     if (!cameraRef.current) return;
     try {
@@ -57,14 +75,27 @@ export default function VideoScreen({ navigation }) {
       setIsRecording(false);
     }
   };
-
+  // Thạch Minh Luân - 22520827
   const stopRecording = async () => {
     if (cameraRef.current) {
       await cameraRef.current.stopRecording();
     }
     setIsRecording(false);
   };
-
+  const sendNotification = async () => {
+    try {
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: "Video đã được lưu!",
+          body: "Video mới đã được lưu thành công.",
+        },
+        trigger: null,
+      });
+    } catch (error) {
+      console.error("Error scheduling notification:", error);
+    }
+  };
+  // Thạch Minh Luân - 22520827
   const saveVideo = async () => {
     if (!videoUri) return;
     try {
@@ -72,22 +103,23 @@ export default function VideoScreen({ navigation }) {
       Alert.alert("Thành công", "Video đã được lưu vào thư viện.", [
         { text: "OK", onPress: () => navigation.goBack() },
       ]);
+      sendNotification();
     } catch (error) {
       console.error("Lỗi khi lưu video:", error);
     }
   };
-
+  // Thạch Minh Luân - 22520827
   if (!cameraPermission?.granted || !microphonePermission?.granted) {
     return (
       <View style={styles.container}>
         <Text style={styles.message}>
-          Cần cấp quyền truy cập để sử dụng camera
+          Vui lòng cấp quyền để được sử dụng camera.
         </Text>
         <Button title="Cấp quyền" onPress={requestCameraPermission} />
       </View>
     );
   }
-
+  // Thạch Minh Luân - 22520827
   return (
     <View style={styles.container}>
       {hasFinishedRecording && videoUri ? (
@@ -108,7 +140,7 @@ export default function VideoScreen({ navigation }) {
           mode="video"
         />
       )}
-
+      {/* // Thạch Minh Luân - 22520827 */}
       {hasFinishedRecording ? (
         <View style={styles.controlContainer}>
           <TouchableOpacity
@@ -118,6 +150,7 @@ export default function VideoScreen({ navigation }) {
               setHasFinishedRecording(false);
             }}
           >
+            {/* // Thạch Minh Luân - 22520827 */}
             <Text style={styles.controlText}>Re-Record</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -134,6 +167,7 @@ export default function VideoScreen({ navigation }) {
           </TouchableOpacity>
         </View>
       ) : (
+        // Thạch Minh Luân - 22520827
         <View style={styles.btnContainer}>
           <TouchableOpacity
             style={styles.recordButton}
@@ -146,6 +180,7 @@ export default function VideoScreen({ navigation }) {
               style={styles.toggleFacingButton}
               onPress={toggleCameraFacing}
             >
+              {/* // Thạch Minh Luân - 22520827 */}
               <Icon name="arrows-rotate" size={25} color="white" />
             </TouchableOpacity>
           </View>
@@ -154,7 +189,7 @@ export default function VideoScreen({ navigation }) {
     </View>
   );
 }
-
+// Thạch Minh Luân - 22520827
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -173,7 +208,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "center",
-  },
+  }, // Thạch Minh Luân - 22520827
   recordButton: {
     width: 80,
     height: 80,
@@ -192,7 +227,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignSelf: "center",
-  },
+  }, // Thạch Minh Luân - 22520827
   controlContainer: {
     top: 10,
     flexDirection: "row",
@@ -206,7 +241,7 @@ const styles = StyleSheet.create({
   },
   reRecordButton: {
     backgroundColor: "red",
-  },
+  }, // Thạch Minh Luân - 22520827
   saveButton: {
     backgroundColor: "blue",
   },

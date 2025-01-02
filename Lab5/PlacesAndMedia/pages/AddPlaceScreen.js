@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-  useContext,
-  useRef,
-} from "react";
+import React, { useCallback, useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -24,11 +18,18 @@ import { LocationContext } from "../Context/LocationContext";
 import Icon from "react-native-vector-icons/FontAwesome6";
 import * as Notifications from "expo-notifications";
 import { APIKEY_GOONG } from "@env";
-
+// Thạch Minh Luân - 22520827
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+// Thạch Minh Luân - 22520827
 export default function AddPlaceScreen({ route, navigation }) {
   const [title, setTitle] = useState("");
   const [imgUri, setImgUri] = useState("");
-  const titleRef = useRef(null);
   const { location, setLocation } = useContext(LocationContext);
 
   useFocusEffect(
@@ -39,7 +40,7 @@ export default function AddPlaceScreen({ route, navigation }) {
       }
     }, [route.params])
   );
-
+  // Thạch Minh Luân - 22520827
   useEffect(() => {
     async function requestPermissions() {
       // Request Media Library Permission
@@ -52,7 +53,7 @@ export default function AddPlaceScreen({ route, navigation }) {
           alert("We need access to your camera roll to select images.");
         }
       }
-
+      // Thạch Minh Luân - 22520827
       // Request Camera Permission
       const { status: cameraStatus } =
         await ImagePicker.requestCameraPermissionsAsync();
@@ -63,18 +64,18 @@ export default function AddPlaceScreen({ route, navigation }) {
           alert("We need access to your camera to take pictures.");
         }
       }
-
+      // Thạch Minh Luân - 22520827
       // Request Location Permission
       const { status: foregroundStatus } =
-        await Location.requestBackgroundPermissionsAsync();
+        await Location.requestForegroundPermissionsAsync();
       if (foregroundStatus !== "granted") {
         const { status: foregroundPermissionStatus } =
-          await Location.requestBackgroundPermissionsAsync();
+          await Location.requestForegroundPermissionsAsync();
         if (foregroundPermissionStatus !== "granted") {
           alert("You need to allow location to receive updates.");
         }
       }
-
+      // Thạch Minh Luân - 22520827
       // Request Notification Permission
       const { status: notificationStatus } =
         await Notifications.requestPermissionsAsync();
@@ -86,10 +87,10 @@ export default function AddPlaceScreen({ route, navigation }) {
         }
       }
     }
-
+    // Thạch Minh Luân - 22520827
     requestPermissions();
   }, []);
-
+  // Thạch Minh Luân - 22520827
   const sendNotification = async () => {
     try {
       await Notifications.scheduleNotificationAsync({
@@ -109,13 +110,13 @@ export default function AddPlaceScreen({ route, navigation }) {
     } else {
       const db = await SQLite.openDatabaseAsync("Places");
       const data = {};
-
+      // Thạch Minh Luân - 22520827
       try {
         const response = await fetch(
           `https://rsapi.goong.io/Geocode?latlng=${location.latitude},${location.longitude}&api_key=${APIKEY_GOONG}`
         );
         const json = await response.json();
-
+        // Thạch Minh Luân - 22520827
         data.address =
           json.results?.[0]?.formatted_address || "Không xác định được địa chỉ";
       } catch (error) {
@@ -127,7 +128,7 @@ export default function AddPlaceScreen({ route, navigation }) {
       data.imgUri = imgUri;
 
       console.log(data, location.latitude, location.longitude, data.address);
-
+      // Thạch Minh Luân - 22520827
       try {
         await db.runAsync(
           `INSERT INTO PLACES (title, img, latitude, longitude, address) VALUES (?, ?, ?, ?, ?)`,
@@ -139,7 +140,7 @@ export default function AddPlaceScreen({ route, navigation }) {
             data.address,
           ]
         );
-
+        // Thạch Minh Luân - 22520827
         sendNotification();
         navigation.reset({
           index: 0,
@@ -151,7 +152,7 @@ export default function AddPlaceScreen({ route, navigation }) {
       }
     }
   };
-
+  // Thạch Minh Luân - 22520827
   async function pickImage() {
     await ImagePicker.requestMediaLibraryPermissionsAsync();
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -163,7 +164,7 @@ export default function AddPlaceScreen({ route, navigation }) {
       setImgUri(result.assets[0].uri);
     }
   }
-
+  // Thạch Minh Luân - 22520827
   async function takePhoto() {
     await ImagePicker.requestCameraPermissionsAsync();
     console.log(await ImagePicker.requestCameraPermissionsAsync());
@@ -171,12 +172,12 @@ export default function AddPlaceScreen({ route, navigation }) {
       allowsEditing: true,
       quality: 1,
     });
-
+    // Thạch Minh Luân - 22520827
     if (!result.canceled) {
       setImgUri(result.assets[0].uri);
     }
   }
-
+  // Thạch Minh Luân - 22520827
   async function getCurrentLocation() {
     let loc = await Location.getCurrentPositionAsync({});
 
@@ -185,7 +186,7 @@ export default function AddPlaceScreen({ route, navigation }) {
       longitude: loc.coords.longitude,
     });
   }
-
+  // Thạch Minh Luân - 22520827
   return (
     <ScrollView style={styles.container}>
       <View style={styles.contentContainer}>
@@ -198,7 +199,7 @@ export default function AddPlaceScreen({ route, navigation }) {
           placeholderTextColor="#999"
         />
       </View>
-
+      {/* // Thạch Minh Luân - 22520827 */}
       <View style={styles.contentContainer}>
         {imgUri ? (
           <Image style={styles.img} source={{ uri: imgUri }} />
@@ -212,14 +213,14 @@ export default function AddPlaceScreen({ route, navigation }) {
             <Icon name="image" size={25} color="white" />
             <Text style={styles.buttonText}>Pick Image</Text>
           </TouchableOpacity>
-
+          {/* // Thạch Minh Luân - 22520827 */}
           <TouchableOpacity style={styles.button} onPress={takePhoto}>
             <Icon name="camera-retro" size={25} color="white" />
             <Text style={styles.buttonText}>Take Image</Text>
           </TouchableOpacity>
         </View>
       </View>
-
+      {/* // Thạch Minh Luân - 22520827 */}
       <View style={styles.contentContainer}>
         {location ? (
           <View style={styles.mapContainer}>
@@ -232,6 +233,7 @@ export default function AddPlaceScreen({ route, navigation }) {
                 longitudeDelta: 0.002,
               }}
             >
+              {/* // Thạch Minh Luân - 22520827 */}
               <Marker
                 coordinate={{
                   latitude: location.latitude,
@@ -256,6 +258,7 @@ export default function AddPlaceScreen({ route, navigation }) {
             style={styles.button}
             onPress={() => navigation.navigate("PickMap")}
           >
+            {/* // Thạch Minh Luân - 22520827 */}
             <Icon name="map-location-dot" size={25} color="white" />
             <Text style={styles.buttonText}>Pick Map</Text>
           </TouchableOpacity>
@@ -268,7 +271,7 @@ export default function AddPlaceScreen({ route, navigation }) {
     </ScrollView>
   );
 }
-
+// Thạch Minh Luân - 22520827
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -292,7 +295,7 @@ const styles = StyleSheet.create({
     padding: 12,
     backgroundColor: "#fff",
     color: "#333",
-  },
+  }, // Thạch Minh Luân - 22520827
   img: {
     width: "100%",
     height: 200,
@@ -308,7 +311,7 @@ const styles = StyleSheet.create({
   },
   noImgText: {
     color: "#777",
-  },
+  }, // Thạch Minh Luân - 22520827
   buttonRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -325,7 +328,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderWidth: 1,
     gap: 4,
-  },
+  }, // Thạch Minh Luân - 22520827
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
@@ -349,5 +352,5 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
-  },
+  }, // Thạch Minh Luân - 22520827
 });

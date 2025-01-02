@@ -10,7 +10,7 @@ import Map from "../pages/Map";
 import VideoView from "../pages/VideoView";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
+// Thạch Minh Luân - 22520827
 const PlaceStack = () => {
   return (
     <Stack.Navigator>
@@ -21,15 +21,16 @@ const PlaceStack = () => {
           headerTitle: "My Places",
           headerRight: () => (
             <Icon
-              name="plus" // Biểu tượng thêm mới
+              name="plus"
               size={25}
               color="orange"
-              onPress={() => navigation.navigate("AddPlace")} // Điều hướng đến màn hình AddPlace
-              style={{ marginRight: 20 }} // Đặt lề phải cho icon
+              onPress={() => navigation.navigate("AddPlace")}
+              style={{ marginRight: 20 }}
             />
           ),
         })}
       />
+      {/* // Thạch Minh Luân - 22520827 */}
       <Stack.Screen
         name="AddPlace"
         component={AddPlaceScreen}
@@ -41,7 +42,7 @@ const PlaceStack = () => {
     </Stack.Navigator>
   );
 };
-
+// Thạch Minh Luân - 22520827
 const MediaStack = () => {
   return (
     <Stack.Navigator>
@@ -50,7 +51,7 @@ const MediaStack = () => {
     </Stack.Navigator>
   );
 };
-
+// Thạch Minh Luân - 22520827
 export default function MainBottom() {
   return (
     <Tab.Navigator>
@@ -65,6 +66,7 @@ export default function MainBottom() {
           },
         }}
       />
+      {/* // Thạch Minh Luân - 22520827 */}
       <Tab.Screen
         name="MediaStack"
         component={MediaStack}
